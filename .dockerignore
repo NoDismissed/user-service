@@ -1,0 +1,56 @@
+############################
+# Environment / Secrets
+############################
+.env
+.env.*
+!.env.example
+
+############################
+# Python cache & artifacts
+############################
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+############################
+# Virtual environments
+############################
+.venv/
+venv/
+env/
+
+############################
+# Pytest / Coverage
+############################
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+############################
+# Git
+############################
+.git/
+.gitignore
+
+############################
+# Editor / OS noise
+############################
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+############################
+# Logs / temp files
+############################
+*.log
+*.tmp
+*.swp
+*.swo
+
+############################
+# Docs & local tooling
+############################
+README.md

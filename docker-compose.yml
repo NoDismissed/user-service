@@ -1,0 +1,27 @@
+services:
+  user-service:
+    build: .
+    container_name: user-service
+    environment:
+      ENV: docker
+      DATABASE_URL: postgresql+psycopg://finance:finance@db:5432/microservice_user
+    depends_on:
+      - db
+    ports:
+      - "50051:50051"
+    restart: always
+
+  db:
+    image: postgres:15
+    container_name: microservice-user-db
+    environment:
+      POSTGRES_USER: finance
+      POSTGRES_PASSWORD: finance
+      POSTGRES_DB: microservice_user
+    ports:
+      - "5432:5432"
+    volumes:
+      - user_db_data:/var/lib/postgresql/data
+
+volumes:
+  user_db_data:
