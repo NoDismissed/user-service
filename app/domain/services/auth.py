@@ -2,7 +2,7 @@ from app.security.password_hasher import verify_password
 from app.domain.exceptions import InvalidCredentials
 
 
-class UserDomainService:
+class AuthDomainService:
 
     def __init__(self, repo):
         self.repo = repo

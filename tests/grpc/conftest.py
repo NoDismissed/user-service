@@ -5,7 +5,7 @@ import grpc
 from app.grpc.server import serve
 from app.db.session import engine
 from app.db.base import Base
-from app.grpc import user_pb2_grpc
+from app.grpc import user_pb2_grpc, auth_pb2_grpc
 
 
 @pytest.fixture(scope = "session", autouse = True)
@@ -24,7 +24,16 @@ def grpc_server():
     # sin necesidad de hacer nada, el servidor gRPC se ejecuta en un hilo separado y se cerrara automaticamente al finalizar las pruebas
 
 
+@pytest.fixture(scope = "session")
+def grpc_channel(grpc_server):
+    return grpc.insecure_channel("localhost:50051")
+
+
 @pytest.fixture
-def grpc_stub(grpc_server):
-    channel = grpc.insecure_channel("localhost:50051")
-    return user_pb2_grpc.UserServiceStub(channel)
+def grpc_stub_user(grpc_channel):
+    return user_pb2_grpc.UserServiceStub(grpc_channel)
+
+
+@pytest.fixture
+def grpc_stub_auth(grpc_channel):
+    return auth_pb2_grpc.AuthServiceStub(grpc_channel)
