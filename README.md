@@ -29,6 +29,7 @@ Microservicio que gestiona el ciclo de vida de usuarios con DB propia y se expon
 - tests de repositorio validan atomicidad por eso se usa rollback
 - tests de grpc validan flujo completo sin atomicidad, no se usa rollback
 - se tiene que hacer import relativo explicito en los archivos pb2_grpc.py (from .)
+- cuando hay migracion sin cambios reales, alembic aun se queda con la version anterior y es correcto
 
 - pip install -e .[dev], -e es editable instala dependencias de toml, correr cada vez que se actualice
 - set -a > source .env.local > set +a, exporta variables a shell
@@ -46,7 +47,7 @@ Microservicio que gestiona el ciclo de vida de usuarios con DB propia y se expon
   -I app/grpc/proto \
   --python_out=app/grpc \
   --grpc_python_out=app/grpc \
-  app/grpc/proto/user.proto
+  app/grpc/proto/*.proto
   (crea stubs en carpeta destino)
 - docker exec -it user-service python, entrar al contenedor del servicio
 - docker exec -it microservice-user-db psql -U finance -d microservice_user, entrar al contenedor de postgres
