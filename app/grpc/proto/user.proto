@@ -4,17 +4,12 @@ package user;
 
 service UserService {
   rpc GetUser (GetUserRequest) returns (UserResponse);
-  rpc GetUserByEmail (GetUserByEmailRequest) returns (UserResponse);
   rpc CreateUser (CreateUserRequest) returns (UserResponse);
   rpc UpdateUser (UpdateUserRequest) returns (UserResponse);
 }
 
 message GetUserRequest {
   int32 id = 1;
-}
-
-message GetUserByEmailRequest {
-  string email = 1;
 }
 
 message CreateUserRequest {

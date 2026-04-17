@@ -12,8 +12,7 @@ def test_get_user_success(user_repository):
     )
     user_repository.save(user)
     service = UserDomainService(user_repository)
-    fetched = service.get_user_by_email("test@test.com")
-    result = service.get_user(fetched.id)
+    result = service.get_user(user.id)
     assert result.email == "test@test.com"
     assert result.is_active is True
 

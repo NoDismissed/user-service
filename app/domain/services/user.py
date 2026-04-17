@@ -17,13 +17,6 @@ class UserDomainService:
         return user
 
 
-    def get_user_by_email(self, email: str) -> User:
-        user = self.repository.get_by_email(email)
-        if user is None:
-            raise UserNotFound(email)
-        return user
-
-
     def create_user(self, email: str, password_hash: str, role: str) -> User:
         if self.repository.get_by_email(email) is not None:
             raise UserAlreadyExists(email)

@@ -1,7 +1,7 @@
 import grpc
 from app.grpc import auth_pb2_grpc, auth_pb2, auth_pb2_grpc
 from app.domain.services.auth import AuthDomainService
-from app.domain.exceptions import InvalidCredentials
+from app.domain.exceptions import InvalidCredentials, UserInactive
 from app.repositories.sqlalchemy_user_repository import SqlAlchemyUserRepository
 from app.db.session import SessionLocal
 
@@ -29,5 +29,7 @@ class AuthGrpcService(auth_pb2_grpc.AuthServiceServicer):
             )
         except InvalidCredentials:
             context.abort(grpc.StatusCode.UNAUTHENTICATED,"INVALID_CREDENTIALS")
+        except UserInactive:
+            context.abort(grpc.StatusCode.PERMISSION_DENIED,"USER_INACTIVE")
         finally:
             db.close()

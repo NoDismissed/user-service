@@ -18,3 +18,8 @@ class UserAlreadyExists(DomainError):
 class InvalidCredentials(DomainError):
     def __init__(self):
         super().__init__("Invalid email or password")
+
+
+class UserInactive(DomainError):
+    def __init__(self):
+        super().__init__("User inactive")
