@@ -30,6 +30,7 @@ Microservicio que gestiona el ciclo de vida de usuarios con DB propia y se expon
 - tests de grpc validan flujo completo sin atomicidad, no se usa rollback
 - se tiene que hacer import relativo explicito en los archivos pb2_grpc.py (from .)
 - cuando hay migracion sin cambios reales, alembic aun se queda con la version anterior y es correcto
+- en render, crear primero la BD
 
 - pip install -e .[dev], -e es editable instala dependencias de toml, correr cada vez que se actualice
 - set -a > source .env.local > set +a, exporta variables a shell
