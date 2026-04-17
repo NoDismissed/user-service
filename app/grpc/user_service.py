@@ -32,22 +32,6 @@ class UserGrpcService(user_pb2_grpc.UserServiceServicer):
             db.close()
 
 
-    def GetUserByEmail(self, request, context):
-        db, service = self._get_service()
-        try:
-            user = service.get_user_by_email(request.email)
-            return user_pb2.UserResponse(
-                id = user.id,
-                email = user.email,
-                role = user.role,
-                is_active = user.is_active,
-            )
-        except UserNotFound:
-            context.abort(grpc.StatusCode.NOT_FOUND, "USER_NOT_FOUND")
-        finally:
-            db.close()
-
-
     def CreateUser(self, request, context):
         db, service = self._get_service()
         try:

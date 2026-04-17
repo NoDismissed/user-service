@@ -14,8 +14,8 @@ def test_create_and_get_user(grpc_stub_user):
     assert response.email == "grpc_user@test.com"
     assert response.role == "user"
     assert response.is_active is True
-    fetched = grpc_stub_user.GetUserByEmail(
-        user_pb2.GetUserByEmailRequest(email = "grpc_user@test.com")
+    fetched = grpc_stub_user.GetUser(
+        user_pb2.GetUserRequest(id = response.id)
     )
     assert fetched.email == "grpc_user@test.com"
 
@@ -48,15 +48,15 @@ def test_get_user_not_found(grpc_stub_user):
 
 
 def test_disable_user(grpc_stub_user):
-    grpc_stub_user.CreateUser(
+    response = grpc_stub_user.CreateUser(
         user_pb2.CreateUserRequest(
             email = "disable@test.com",
             password_hash = "hash",
             role = "user",
         )
     )
-    fetched = grpc_stub_user.GetUserByEmail(
-        user_pb2.GetUserByEmailRequest(email = "disable@test.com")
+    fetched = grpc_stub_user.GetUser(
+        user_pb2.GetUserRequest(id = response.id)
     )
     grpc_stub_user.UpdateUser(
         user_pb2.UpdateUserRequest(

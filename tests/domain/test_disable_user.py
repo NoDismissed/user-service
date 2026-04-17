@@ -10,11 +10,10 @@ def test_disable_user(user_repository):
     )
     user_repository.save(user)
     service = UserDomainService(user_repository)
-    fetched = service.get_user_by_email("a@test.com")
     service.update_user(
-        user_id = fetched.id,
+        user_id = user.id,
         is_active = False,
         role = "user"
     )
-    updated = user_repository.get_by_id(fetched.id)
+    updated = user_repository.get_by_id(user.id)
     assert updated.is_active is False
